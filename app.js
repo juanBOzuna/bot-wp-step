@@ -266,13 +266,13 @@ const withSession = () => {
 const withOutSession = () => {
 
     console.log('No tenemos session guardada');
-    let dirSessionStorage = __dirname + "\\.wwebjs_auth";
-    console.log(dirSessionStorage.replaceAll('\\', '//'));
+    // let dirSessionStorage = __dirname + "\\.wwebjs_auth";
+    // console.log(dirSessionStorage.replaceAll('\\', '//'));
 
     client = new Client({
         authStrategy: new LocalAuth({
             clientId:"22222",
-            dataPath:"C://Users//juan barraza//Downloads//BotWhatsAppPro//.wwebjs_auth//session-22222"
+            dataPath: window.location.hostname+"/.wwebjs_auth/session-22222"
             // dataPath:dirSessionStorage
             }),
         puppeteer: {
@@ -284,7 +284,7 @@ const withOutSession = () => {
 
     client.on('qr', qr => generateImage(qr, () => {
         qrcode.generate(qr, { small: true });
-        console.log(`Ver QR http://localhost:${port}/qr`)
+        console.log(`Ver QR`+window.location.hostname+`/qr`)
         socketEvents.sendQR(qr)
     }))
 
